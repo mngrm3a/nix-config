@@ -1,11 +1,19 @@
-ROOT_FILES := flake.nix home.nix
-PROGRAM_FILES := $(wildcard programs/*)
+FLAKE_NIX := flake.nix
+MODULES_NIX := $(wildcard modules/*)
+HOMEMANAGER_NIX := $(wildcard home-manager/*)
+ALL_NIX := $(FLAKE_NIX) $(MODULES_NIX) $(HOMEMANAGER_NIX)
 
-build: $(ROOT_FILES) $(PROGRAM_FILES)
+build: $(ALL_NIX)
 	nix run --show-trace . -- build --flake .
 
-switch: $(ROOT_FILES) $(PROGRAM_FILES)
+switch: $(ALL_NIX)
 	nix run . -- switch --flake .
+
+generations: $(ALL_NIX)
+	nix run . -- generations | less
+
+news: $(ALL_NIX)
+	nix run . -- news --flake .
 
 PHONY: clean
 clean:

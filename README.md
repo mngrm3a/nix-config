@@ -4,25 +4,16 @@ It is not necessary to install Home Manager as it is the default package of this
 
 * build configuration: `nix run . -- build --flake .`
 * switch to configuration: `nix run . -- switch --flake .`
-* use `$SHELL` instead of bash: `nix develop -c $SHELL`
+* use `$SHELL` instead of bash: `nix develop`
 
 # References
-
-## Home Manager configuration
-
-* https://home-manager-options.extranix.com
-* https://nixos.wiki/wiki/Zsh#Zplug
-* https://github.com/adobe-fonts/source-code-prow
-
-## Standalone Home Manager setup
-
-* https://www.chrisportela.com/posts/home-manager-flake/
-* https://github.com/jonringer/nixpkgs-config/tree/master
 
 ## NixOs setup with nix-darwin
 
 * https://github.com/mitchellh/nixos-config
 
+## Standalone Home Manager setup
 
-
-
+* [Self contained flake](https://www.chrisportela.com/posts/home-manager-flake/)
+* [UI to search options](https://home-manager-options.extranix.com)
+* [home.state](https://nix-community.github.io/home-manager/options.xhtml#opt-home.stateVersion)
