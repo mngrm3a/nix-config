@@ -8,7 +8,13 @@ let
   inherit (pkgs.stdenv) isDarwin;
 in
 {
-  imports = [ ];
+  imports = [
+    ./programs/alacritty.nix
+    ./programs/zsh.nix
+    ./programs/tmux.nix
+    ./programs/zellij.nix
+    ./programs/fzf.nix
+  ];
 
   nix.package = pkgs.nix;
   home.packages = [ pkgs.nix ];
@@ -22,6 +28,17 @@ in
       base = "en_US.UTF-8";
       measurement = "de_DE.UTF-8";
       monetary = "de_DE.UTF-8";
+    };
+  };
+
+  programs.eza.enable = true;
+  programs.ripgrep.enable = true;
+  programs.zoxide.enable = true;
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "gruvbox-dark";
     };
   };
 }
