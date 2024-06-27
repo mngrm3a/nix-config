@@ -3,19 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      # follow = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      # follow = "nixpkgs";
-    };
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
   };
 
   outputs =
-    inputs@{
+    {
       nixpkgs,
+      nixpkgs-unstable,
       home-manager,
       flake-utils,
       ...
@@ -28,7 +24,10 @@
       (
         system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
+          pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+          pkgs = nixpkgs.legacyPackages.${system}.extend (
+            final: prev: { neovim-unwrapped = pkgs-unstable.neovim-unwrapped; }
+          );
         in
         {
           packages.default = home-manager.packages.${system}.default;
@@ -47,7 +46,7 @@
             inherit pkgs;
             modules = [ ./home-manager/mngrm3a ];
             extraSpecialArgs = {
-              inherit inputs;
+              unstable = nixpkgs-unstable.legacyPackages.${system};
             };
           };
         }

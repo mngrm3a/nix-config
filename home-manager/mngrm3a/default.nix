@@ -15,6 +15,7 @@ in
     ./programs/zellij.nix
     ./programs/fzf.nix
     ./programs/git.nix
+    ./programs/nvim.nix
   ];
 
   nix.package = pkgs.nix;
