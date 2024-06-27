@@ -14,6 +14,7 @@ in
     ./programs/tmux.nix
     ./programs/zellij.nix
     ./programs/fzf.nix
+    ./programs/git.nix
   ];
 
   nix.package = pkgs.nix;
