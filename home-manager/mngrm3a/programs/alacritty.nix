@@ -16,7 +16,7 @@ in
     settings = {
       window = {
         option_as_alt = "OnlyLeft";
-        opacity = 0.8;
+        opacity = 1;
         # blur = true;
         startup_mode = "SimpleFullscreen";
       };
