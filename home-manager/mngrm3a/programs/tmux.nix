@@ -23,7 +23,12 @@
       }
       { plugin = tmux-fzf; }
     ];
-    extraConfig = builtins.readFile ./tmux.conf;
-    terminal = "screen-256color";
+    extraConfig = ''
+      set-window-option -g automatic-rename on
+      set-option -g set-titles on
+      setw -g mouse on
+      setw -g monitor-activity on
+      set -ag terminal-overrides ",$TERM:Tc"
+    '';
   };
 }
