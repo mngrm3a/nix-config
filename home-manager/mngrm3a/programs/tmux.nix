@@ -23,6 +23,7 @@
       }
       { plugin = tmux-fzf; }
     ];
+    terminal = "tmux-256color";
     extraConfig = ''
       set-window-option -g automatic-rename on
       set-option -g set-titles on
