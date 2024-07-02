@@ -19,6 +19,10 @@
       url = "github:sindresorhus/pure";
       flake = false;
     };
+    simple-zsh-nix-shell = {
+      url = "github:goolord/simple-zsh-nix-shell";
+      flake = false;
+    };
   };
 
   outputs =
@@ -30,6 +34,7 @@
       zsh-async,
       zsh-fzf-tab,
       zsh-pure,
+      simple-zsh-nix-shell,
       ...
     }:
     flake-utils.lib.eachSystem
@@ -44,7 +49,12 @@
           pkgs = nixpkgs.legacyPackages.${system}.extend (
             final: prev: {
               neovim-unwrapped = pkgs-unstable.neovim-unwrapped;
-              inherit zsh-async zsh-fzf-tab zsh-pure;
+              inherit
+                zsh-async
+                zsh-fzf-tab
+                zsh-pure
+                simple-zsh-nix-shell
+                ;
             }
           );
         in

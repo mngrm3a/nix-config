@@ -91,9 +91,26 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "simple-zsh-nix-shell": "simple-zsh-nix-shell",
         "zsh-async": "zsh-async",
         "zsh-fzf-tab": "zsh-fzf-tab",
         "zsh-pure": "zsh-pure"
+      }
+    },
+    "simple-zsh-nix-shell": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677286525,
+        "narHash": "sha256-47YJCxkCH5jiJfKRSgwbZLEX/ALgHXj8P/9sPqW6GsM=",
+        "owner": "goolord",
+        "repo": "simple-zsh-nix-shell",
+        "rev": "fec15c689de13de13fc308bcb62d735657852797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "goolord",
+        "repo": "simple-zsh-nix-shell",
+        "type": "github"
       }
     },
     "systems": {

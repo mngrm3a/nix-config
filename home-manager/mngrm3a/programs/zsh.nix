@@ -45,6 +45,10 @@
         src = zsh-pure;
         file = "pure.zsh";
       }
+      {
+        name = "simple-zsh-nix-shell";
+        src = simple-zsh-nix-shell;
+      }
     ];
 
     envExtra = ''
@@ -53,4 +57,12 @@
 
     initExtra = builtins.readFile ./zshrc;
   };
+
+  # NOTE: this is needed to make simple-zsh-nix-shell work
+  # https://github.com/goolord/simple-zsh-nix-shell?tab=readme-ov-file#install 
+  home.file.".bashrc".text = ''
+    if [ ! -z ''${SIMPLE_ZSH_NIX_SHELL_BASH+x} ] ;
+      then source $SIMPLE_ZSH_NIX_SHELL_BASH
+    fi
+  '';
 }
