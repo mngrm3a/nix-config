@@ -6,6 +6,19 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
+
+    zsh-async = {
+      url = "github:mafredri/zsh-async";
+      flake = false;
+    };
+    zsh-fzf-tab = {
+      url = "github:Aloxaf/fzf-tab";
+      flake = false;
+    };
+    zsh-pure = {
+      url = "github:sindresorhus/pure";
+      flake = false;
+    };
   };
 
   outputs =
@@ -14,6 +27,9 @@
       nixpkgs-unstable,
       home-manager,
       flake-utils,
+      zsh-async,
+      zsh-fzf-tab,
+      zsh-pure,
       ...
     }:
     flake-utils.lib.eachSystem
@@ -26,7 +42,10 @@
         let
           pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
           pkgs = nixpkgs.legacyPackages.${system}.extend (
-            final: prev: { neovim-unwrapped = pkgs-unstable.neovim-unwrapped; }
+            final: prev: {
+              neovim-unwrapped = pkgs-unstable.neovim-unwrapped;
+              inherit zsh-async zsh-fzf-tab zsh-pure;
+            }
           );
         in
         {

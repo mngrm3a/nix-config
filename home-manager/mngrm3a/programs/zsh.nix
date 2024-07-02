@@ -7,7 +7,7 @@
 {
   # integrations
   programs.fzf.enableZshIntegration = true;
-  # ! IMPORTANT: aliases defined in zshrc collide eza's zsh integration
+  # WARN: aliases defined in zshrc collide with eza zsh integration
   programs.eza.enableZshIntegration = false;
   programs.zoxide.enableZshIntegration = true;
 
@@ -19,7 +19,7 @@
     autosuggestion.enable = true;
 
     sessionVariables = {
-      # * EDITOR is set in the nvim config
+      # NOTE: EDITOR is set in the nvim config
       # TODO: manage vscode via home manager
       VISUAL = "code";
     };
@@ -27,27 +27,25 @@
     shellAliases = {
       e = "$EDITOR";
       v = "$VISUAL";
-      d = "$VISUAL --diff";
+      d = "$EDITOR -d";
     };
 
-    zplug = {
-      enable = true;
-      plugins = [
-        # TODO: add plugins as flake input and use vanilla plugins
-        # ? this might be problematic as fzf-tab requires a specific loading order
-        # * see: https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#install
-        { name = "Aloxaf/fzf-tab"; }
-        # zsh-async is a dependency of pure
-        { name = "mafredri/zsh-async"; }
-        {
-          name = "sindresorhus/pure";
-          tags = [
-            "use:pure.zsh"
-            "as:theme"
-          ];
-        }
-      ];
-    };
+    plugins = with pkgs; [
+      {
+        name = "zsh-async";
+        src = zsh-async;
+        file = "async.zsh";
+      }
+      {
+        name = "fzf-tab";
+        src = zsh-fzf-tab;
+      }
+      {
+        name = "pure";
+        src = zsh-pure;
+        file = "pure.zsh";
+      }
+    ];
 
     envExtra = ''
       export PATH="$PATH:$HOME/.local/bin"
