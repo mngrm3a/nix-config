@@ -1,11 +1,8 @@
 {
-  description = "Home Manager configuration";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #TODO: figure out, why follows doesn't work
+    home-manager.url = "github:nix-community/home-manager";
 
     zsh-async = {
       url = "github:mafredri/zsh-async";
@@ -28,56 +25,64 @@
   outputs =
     {
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
-      flake-utils,
       zsh-async,
       zsh-fzf-tab,
       zsh-pure,
       simple-zsh-nix-shell,
       ...
     }:
-    flake-utils.lib.eachSystem
-      [
+    let
+      supportedSystems = [
         "aarch64-darwin"
+        "x86_64-darwin"
         "x86_64-linux"
-      ]
-      (
+      ];
+      overlay = final: prev: {
+        inherit
+          zsh-async
+          zsh-fzf-tab
+          zsh-pure
+          simple-zsh-nix-shell
+          ;
+      };
+      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
+      nixkgsFor = forAllSystems (
         system:
-        let
-          pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-          pkgs = nixpkgs.legacyPackages.${system}.extend (
-            final: prev: {
-              neovim-unwrapped = pkgs-unstable.neovim-unwrapped;
-              inherit
-                zsh-async
-                zsh-fzf-tab
-                zsh-pure
-                simple-zsh-nix-shell
-                ;
-            }
-          );
-        in
-        {
-          packages.default = home-manager.packages.${system}.default;
-
-          formatter = pkgs.nixfmt-rfc-style;
-          devShells.default =
-            with pkgs;
-            mkShellNoCC {
-              buildInputs = [
-                nil
-                nixfmt-rfc-style
-              ];
-            };
-
-          packages.homeConfigurations.mngrm3a = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [ ./home-manager/mngrm3a ];
-            extraSpecialArgs = {
-              unstable = nixpkgs-unstable.legacyPackages.${system};
-            };
-          };
+        import nixpkgs {
+          inherit system;
+          overlays = [ overlay ];
         }
       );
+    in
+    {
+      packages = forAllSystems (system: {
+        default = home-manager.packages.${system}.default;
+        homeConfigurations.mngrm3a =
+          let
+            pkgs = nixkgsFor.${system};
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ ./home-manager/mngrm3a ];
+            extraSpecialArgs = { };
+          };
+      });
+
+      formatter = forAllSystems (system: nixkgsFor.${system}.nixfmt-rfc-style);
+
+      devShells = forAllSystems (system: {
+        default =
+          let
+            pkgs = nixkgsFor.${system};
+          in
+          with pkgs;
+          mkShellNoCC {
+            nativeBuildInputs = [
+              nil
+              nixfmt-rfc-style
+            ];
+          };
+      });
+    };
 }
