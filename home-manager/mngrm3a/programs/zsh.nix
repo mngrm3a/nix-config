@@ -55,7 +55,10 @@
       export PATH="$PATH:$HOME/.local/bin"
     '';
 
-    initExtra = builtins.readFile ./zshrc;
+    initExtra = ''
+      source <(${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe --completions)
+      ${builtins.readFile ./zshrc}
+    '';
   };
 
   # NOTE: this is needed to make simple-zsh-nix-shell work
@@ -65,4 +68,7 @@
       then source $SIMPLE_ZSH_NIX_SHELL_BASH
     fi
   '';
+
+  # zsh toolbox
+  home.file.".local/bin/tx".source = "${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe";
 }

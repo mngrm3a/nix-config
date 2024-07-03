@@ -3,34 +3,6 @@
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 ################################################################################
-## tmux
-################################################################################
-tx() {
-    if (( $# == 1)); then
-        local sessions=( $(tmux list-session 2>/dev/null|cut -f1 -d:) )
-        if [[ ${sessions[(ie)$1]} -le ${#sessions} ]]; then
-            tmux attach-session -t $1
-        else
-            local arg="${$(readlink -f $1 2>/dev/null):-1}"
-            local name="$(basename $arg|tr '[:upper:] /' '[:lower:]-'|cut -c 1-16)"
-            local wd=
-
-            if [[ -d "$arg" ]]; then
-                wd="$arg"
-            else
-                wd="$PWD"
-            fi
-
-            tmux new-session -c "$wd" -s "$name"
-        fi
-    else
-        tmux list-session
-    fi
-}
-_tx() { words[1]=(tmux attach-session -t); (( CURRENT+=2 )); service=tmux; _tmux }
-compdef _tx tx
-
-################################################################################
 ## exa / ls
 ################################################################################
 typeset -ga exa_options
