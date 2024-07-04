@@ -22,6 +22,14 @@ in
   home.packages = [ pkgs.nix ];
   programs.home-manager.enable = true;
 
+  home.file."Library/LaunchAgents/com.local.KeyRemapping.plist" = {
+    # NOTE:
+    # * CapsLock -> LeftControl
+    # * RightOption -> LeftControl
+    enable = isDarwin;
+    source = ./macos/com.local.KeyRemapping.plist;
+  };
+
   home = {
     stateVersion = "24.05";
     username = "mngrm3a";
