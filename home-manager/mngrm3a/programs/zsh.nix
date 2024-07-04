@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  ezaOptions = "--group-directories-first --group --long --icons --git --git-ignore";
+in
 {
   # integrations
   programs.fzf.enableZshIntegration = true;
@@ -25,9 +28,20 @@
     };
 
     shellAliases = {
+      # common
       e = "$EDITOR";
       v = "$VISUAL";
       d = "$EDITOR -d";
+
+      # eza
+      l1 = "command eza -1";
+      lsl = "eza ${ezaOptions}";
+      lsd = "eza --only-dirs ${ezaOptions}";
+      lsa = "eza --all --long --icons";
+      lsc = "eza --created --long";
+      lso = "eza --accessed --long";
+      lse = "eza --extended --long";
+      lst = "eza --tree --icons";
     };
 
     plugins = with pkgs; [
@@ -57,7 +71,7 @@
     '';
 
     initExtra = ''
-      source <(${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe --completions)
+      source <(${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe --toolbox-completions)
       ${builtins.readFile ./zshrc}
     '';
   };
@@ -72,4 +86,5 @@
 
   # zsh toolbox
   home.file.".local/bin/tx".source = "${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe";
+  home.file.".local/bin/l".source = "${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe";
 }

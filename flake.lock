@@ -112,11 +112,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1720051490,
-        "narHash": "sha256-NEKX7jSnpJAxJz8wXICuPTI2H45YzhlKV93Bto6X6Y8=",
+        "lastModified": 1720100839,
+        "narHash": "sha256-tlIVTuatViE4iISwogBIHne33AbNVsukHPkFfgmQEmo=",
         "owner": "mngrm3a",
         "repo": "zsh-toolbox",
-        "rev": "c36c8dfbed17379d961da8afb5edbb25e4ad4965",
+        "rev": "85047613289bb9a5e59e0778749f41b28cc193da",
         "type": "github"
       },
       "original": {

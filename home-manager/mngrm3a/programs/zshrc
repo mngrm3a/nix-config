@@ -3,21 +3,6 @@
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 ################################################################################
-## exa / ls
-################################################################################
-typeset -ga exa_options
-exa_options=("--group-directories-first" "--group" "--long" "--icons" "--git" "--git-ignore")
-alias l1="command eza -1"
-alias lsl="eza ${exa_options:+${exa_options[*]}}"
-alias lsd="eza --only-dirs ${exa_options:+${exa_options[*]}}"
-alias lsa="eza --all --long --icons"
-alias lsc="eza --created --long"
-alias lso="eza --accessed --long"
-alias lse="eza --extended --long"
-alias lst="eza --tree --icons"
-l() { local f=$(readlink -f ${1:-$PWD}); [[ -f $f ]] && bat $f || lsl $f }
-
-################################################################################
 ## git
 ################################################################################
 gl() { git log --pretty='%h%%%s%%%cr' -n${1:-5}|column -t -s'%' }
