@@ -9,14 +9,6 @@
       url = "github:mafredri/zsh-async";
       flake = false;
     };
-    zsh-fzf-tab = {
-      url = "github:Aloxaf/fzf-tab";
-      flake = false;
-    };
-    zsh-pure = {
-      url = "github:sindresorhus/pure";
-      flake = false;
-    };
     simple-zsh-nix-shell = {
       url = "github:goolord/simple-zsh-nix-shell";
       flake = false;
@@ -29,8 +21,6 @@
       home-manager,
       zsh-toolbox,
       zsh-async,
-      zsh-fzf-tab,
-      zsh-pure,
       simple-zsh-nix-shell,
       ...
     }:
@@ -40,14 +30,7 @@
         "x86_64-darwin"
         "x86_64-linux"
       ];
-      overlay = final: prev: {
-        inherit
-          zsh-async
-          zsh-fzf-tab
-          zsh-pure
-          simple-zsh-nix-shell
-          ;
-      };
+      overlay = final: prev: { inherit zsh-async simple-zsh-nix-shell; };
       forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
       nixkgsFor = forAllSystems (
         system:

@@ -31,19 +31,20 @@
     };
 
     plugins = with pkgs; [
+      # NOTE: dependency of pure
       {
         name = "zsh-async";
         src = zsh-async;
         file = "async.zsh";
       }
       {
-        name = "fzf-tab";
-        src = zsh-fzf-tab;
+        name = "pure";
+        src = pure-prompt;
+        file = "share/zsh/site-functions/prompt_pure_setup";
       }
       {
-        name = "pure";
-        src = zsh-pure;
-        file = "pure.zsh";
+        name = "fzf-tab";
+        src = zsh-fzf-tab;
       }
       {
         name = "simple-zsh-nix-shell";
