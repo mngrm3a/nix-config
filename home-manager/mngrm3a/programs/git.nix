@@ -10,15 +10,10 @@
     userName = "mngrm3a";
     userEmail = "9266859+mngrm3a@users.noreply.github.com";
     extraConfig = {
-      core = {
-        editor = "nvim";
-      };
-      diff = {
-        tool = "nvimdiff";
-      };
-      difftool = {
-        prompt = false;
-      };
+      init.defaultBranch = "master";
+      core.editor = "nvim";
+      diff.tool = "nvimdiff";
+      difftool.prompt = false;
     };
     aliases = {
       graph = "log --oneline --graph --decorate --all";
