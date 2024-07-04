@@ -59,6 +59,7 @@ in
       {
         name = "fzf-tab";
         src = zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
       }
       {
         name = "simple-zsh-nix-shell";
