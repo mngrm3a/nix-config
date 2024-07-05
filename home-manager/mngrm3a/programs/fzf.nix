@@ -24,7 +24,7 @@
       marker = "#fe8019";
       header = "#665c54";
     };
-    defaultCommand = "rg --files --hidden --iglob '!.git'";
+    defaultCommand = "fd --color=never --type f";
     defaultOptions = [
       "--border='rounded'"
       "--border-label=''"
@@ -35,7 +35,7 @@
       "--separator='─'"
       "--scrollbar='│'"
     ];
-    fileWidgetCommand = "rg --files --hidden --iglob '!.git'";
+    fileWidgetCommand = "fd --color=never --type f";
     fileWidgetOptions = [
       "--preview 'bat -n --color=always {}'"
       "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
@@ -48,10 +48,8 @@
       "--color header:italic"
       "--header 'Press CTRL-Y to copy command into clipboard'"
     ];
-    # TODO: find out how to use eza to print a proper recursive directory listing
-    changeDirWidgetOptions = [
-      "--walker-skip .git,node_modules,target,dist-newstyle,result"
-      "--preview 'eza --tree {}'"
-    ];
+    changeDirWidgetCommand = "fd --color=never --type d";
+    changeDirWidgetOptions = [ "--preview 'eza --tree {}'" ];
   };
+  home.packages = with pkgs; [ fd ];
 }
