@@ -24,6 +24,7 @@
       marker = "#fe8019";
       header = "#665c54";
     };
+    defaultCommand = "rg --files --hidden --iglob '!.git'";
     defaultOptions = [
       "--border='rounded'"
       "--border-label=''"
@@ -33,6 +34,24 @@
       "--pointer=''"
       "--separator='─'"
       "--scrollbar='│'"
+    ];
+    fileWidgetCommand = "rg --files --hidden --iglob '!.git'";
+    fileWidgetOptions = [
+      "--preview 'bat -n --color=always {}'"
+      "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+    ];
+    historyWidgetOptions = [
+      "--preview 'echo {}' --preview-window up:3:hidden:wrap"
+      "--bind 'ctrl-/:toggle-preview'"
+      "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'"
+      "--color header:italic"
+      "--header 'Press CTRL-Y to copy command into clipboard'"
+    ];
+    # TODO: find out how to use eza to print a proper recursive directory listing
+    changeDirWidgetOptions = [
+      "--walker-skip .git,node_modules,target,dist-newstyle,result"
+      "--preview 'eza --tree {}'"
     ];
   };
 }
