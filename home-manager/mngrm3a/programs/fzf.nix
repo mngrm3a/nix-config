@@ -49,7 +49,7 @@
       "--header 'Press CTRL-Y to copy command into clipboard'"
     ];
     changeDirWidgetCommand = "fd --color=never --type d";
-    changeDirWidgetOptions = [ "--preview 'eza --tree {}'" ];
+    changeDirWidgetOptions = [ "--preview 'eza --color=always --tree --icons --git-ignore {}'" ];
   };
   home.packages = with pkgs; [ fd ];
 }
