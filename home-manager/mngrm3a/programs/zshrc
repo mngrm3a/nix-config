@@ -1,16 +1,4 @@
 # case-insensitive matching only if there are no case-sensitive matches
 # see https://superuser.com/a/1092328
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-
-################################################################################
-## nix
-################################################################################
-nix-store-path() { echo "$(readlink -f ${$(command -v $1):-$1})" }
-nix-store-derivation() { nix-store --query --deriver "$(nix-store-path $1)" }
-nix-store-dependencies() { nix-store --query --references "$(nix-store-path $1)" }
-nix-store-references() { nix-store --query --referrers "$(nix-store-path $1)" }
-
-################################################################################
-## misc
-################################################################################
 cheat() {curl "https://cheat.sh/${@}"|bat}

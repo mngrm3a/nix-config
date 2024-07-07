@@ -31,7 +31,10 @@ in
   };
 
   nix.package = pkgs.nix;
-  home.packages = [ pkgs.nix ];
+  home.packages = with pkgs; [
+    nix
+    nix-scripts
+  ];
   programs.home-manager.enable = true;
 
   home.file."Library/LaunchAgents/com.local.KeyRemapping.plist" = {
