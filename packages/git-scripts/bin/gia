@@ -1,0 +1,52 @@
+#!/usr/bin/env zsh
+
+_FZF_BIND_TOGGLE_ALL='ctrl-b'
+_FZF_LAYOUT='up:80%'
+
+PROG="$0"
+
+function preview_file() {
+    local file=$(sed 's/^...//' <<< "$1")
+    [[ ! -e "$file" ]] && echo "can't open file '$file'" && return 1
+    if [[ -d "$file" ]]; then
+        eza --color=always --tree --icons --git-ignore "$file"
+    else
+        if [[ $1 == '?'* ]]; then
+            bat --color=always --style=numbers "$file"
+        else
+            git \
+                -c 'diff.external=difft --color always --background dark --display side-by-side-show-both' \
+                diff \
+                --color=always \
+                "$file"
+        fi
+    fi
+}
+
+function select_files() {
+    git status --porcelain=v1 \
+        | sed '/^. /d' \
+        | fzf \
+            --multi \
+            --bind "$_FZF_BIND_TOGGLE_ALL":toggle-all \
+            --preview="$PROG --preview {}" \
+            --preview-window="$_FZF_LAYOUT" \
+        | sed 's/...//'
+}
+
+case $1 in
+    '--preview')
+        preview_file "$2"
+        exit $?
+        ;;
+    '')
+        files=(${(f)"$(select_files)"})
+        ;;
+    *)
+        files=(${@})
+        ;;
+esac
+
+if (( ${#files[@]} > 0 )); then 
+    git add --verbose ${files[@]}
+fi

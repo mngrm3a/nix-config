@@ -39,4 +39,6 @@
     gbM = "git branch -M";
     gbR = "git reset --hard";
   };
+
+  home.packages = [ pkgs.git-scripts ];
 }

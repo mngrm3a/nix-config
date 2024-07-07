@@ -1,0 +1,2 @@
+#compdef gia
+_gia() { words[1]=(git add); (( CURRENT+=1 )); service=git; _git }

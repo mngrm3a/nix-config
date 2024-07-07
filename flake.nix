@@ -31,6 +31,7 @@
         "x86_64-linux"
       ];
       zsh-plugin-overlay = final: prev: { inherit zsh-async simple-zsh-nix-shell; };
+      package-overlay = import ./packages;
       forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
       nixkgsFor = forAllSystems (
         system:
@@ -38,6 +39,7 @@
           inherit system;
           overlays = [
             zsh-plugin-overlay
+            package-overlay
             zsh-toolbox.overlays.default
           ];
         }
