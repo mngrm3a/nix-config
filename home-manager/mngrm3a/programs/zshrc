@@ -14,18 +14,6 @@ compdef _gl glh
 glm() { git show -s --format=%s $1|pbcopy }
 compdef _gl glm
 
-gir() {
-    if (( $# > 0)); then
-        if (( $# == 1 )) && [[ "$1" == . ]]; then
-            git restore --staged $(git diff --staged --name-only)
-        else
-            git restore --staged ${@}
-        fi
-    else
-        git diff --staged --name-only|fzf -m --bind ctrl-a:toggle-all|xargs git restore --staged
-    fi
-}
-
 gbs() { git switch $1 2&>/dev/null || git switch --create $1 }
 _gbs() { words[1]=(git branch); (( CURRENT+=1 )); service=git; _git }
 compdef _gbs gbs

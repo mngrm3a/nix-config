@@ -1,0 +1,2 @@
+#compdef gir
+_gir() { words[1]=(git restore --staged); (( CURRENT+=2 )); service=git; _git }
