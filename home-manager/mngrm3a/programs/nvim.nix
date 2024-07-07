@@ -51,15 +51,17 @@
       cmp-nvim-lsp-document-symbol
       luasnip
 
-      # mngrm3a.utils
+      # utils
       which-key-nvim
       undotree
+      oil-nvim
 
       # TODO: import as flake when config is stable
       # config plugin
       # mngrm3a-nvim
     ];
   };
+
   home.packages = with pkgs; [
     nil
     nixfmt-rfc-style
