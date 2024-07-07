@@ -25,16 +25,17 @@
       header = "#665c54";
     };
     defaultCommand = "fd --color=never --type f";
-    defaultOptions = [
-      "--border='rounded'"
-      "--border-label=''"
-      "--preview-window='border-rounded'"
-      "--prompt='> '"
-      "--marker='>'"
-      "--pointer=''"
-      "--separator='─'"
-      "--scrollbar='│'"
-    ];
+    # TODO: figure out how to use styling while having zsh widgets of proper size
+    # defaultOptions = [
+    #   "--border='rounded'"
+    #   "--border-label=''"
+    #   "--preview-window='border-rounded'"
+    #   "--prompt='> '"
+    #   "--marker='>'"
+    #   "--pointer=''"
+    #   "--separator='─'"
+    #   "--scrollbar='│'"
+    # ];
     fileWidgetCommand = "fd --color=never --type f";
     fileWidgetOptions = [
       "--preview 'bat -n --color=always {}'"
