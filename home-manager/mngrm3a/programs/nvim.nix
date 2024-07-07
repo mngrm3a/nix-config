@@ -72,4 +72,9 @@
     shellcheck
     shfmt
   ];
+
+  programs.zsh.shellAliases = {
+    e = "$EDITOR";
+    d = "$EDITOR -d";
+  };
 }

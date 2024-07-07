@@ -4,14 +4,9 @@
   pkgs,
   ...
 }:
-let
-  ezaOptions = "--group-directories-first --group --long --icons --git --git-ignore";
-in
 {
   # integrations
   programs.fzf.enableZshIntegration = true;
-  # WARN: aliases defined in zshrc collide with eza zsh integration
-  programs.eza.enableZshIntegration = false;
   programs.zoxide.enableZshIntegration = true;
 
   programs.zsh = {
@@ -20,29 +15,6 @@ in
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
-
-    sessionVariables = {
-      # NOTE: EDITOR is set in the nvim config
-      # TODO: manage vscode via home manager
-      VISUAL = "code";
-    };
-
-    shellAliases = {
-      # common
-      e = "$EDITOR";
-      v = "$VISUAL";
-      d = "$EDITOR -d";
-
-      # eza
-      l1 = "command eza -1";
-      lsl = "eza ${ezaOptions}";
-      lsd = "eza --only-dirs ${ezaOptions}";
-      lsa = "eza --all --long --icons";
-      lsc = "eza --created --long";
-      lso = "eza --accessed --long";
-      lse = "eza --extended --long";
-      lst = "eza --tree --icons";
-    };
 
     plugins = with pkgs; [
       # NOTE: dependency of pure
@@ -84,8 +56,4 @@ in
       then source $SIMPLE_ZSH_NIX_SHELL_BASH
     fi
   '';
-
-  # zsh toolbox
-  home.file.".local/bin/tx".source = "${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe";
-  home.file.".local/bin/l".source = "${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe";
 }

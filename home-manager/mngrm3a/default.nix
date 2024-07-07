@@ -16,7 +16,19 @@ in
     ./programs/fzf.nix
     ./programs/git.nix
     ./programs/nvim.nix
+    ./programs/eza.nix
   ];
+
+  home = {
+    stateVersion = "24.05";
+    username = "mngrm3a";
+    homeDirectory = if isDarwin then "/Users/mngrm3a" else "/home/mngrm3a";
+    language = {
+      base = "en_US.UTF-8";
+      measurement = "de_DE.UTF-8";
+      monetary = "de_DE.UTF-8";
+    };
+  };
 
   nix.package = pkgs.nix;
   home.packages = [ pkgs.nix ];
@@ -30,18 +42,6 @@ in
     source = ./macos/com.local.KeyRemapping.plist;
   };
 
-  home = {
-    stateVersion = "24.05";
-    username = "mngrm3a";
-    homeDirectory = if isDarwin then "/Users/mngrm3a" else "/home/mngrm3a";
-    language = {
-      base = "en_US.UTF-8";
-      measurement = "de_DE.UTF-8";
-      monetary = "de_DE.UTF-8";
-    };
-  };
-
-  programs.eza.enable = true;
   programs.ripgrep.enable = true;
   programs.zoxide.enable = true;
 

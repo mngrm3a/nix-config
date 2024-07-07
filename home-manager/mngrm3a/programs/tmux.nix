@@ -32,4 +32,6 @@
       set -ag terminal-overrides ",$TERM:Tc"
     '';
   };
+
+  home.file.".local/bin/tx".source = "${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe";
 }

@@ -51,5 +51,6 @@
     changeDirWidgetCommand = "fd --color=never --type d";
     changeDirWidgetOptions = [ "--preview 'eza --color=always --tree --icons --git-ignore {}'" ];
   };
+
   home.packages = with pkgs; [ fd ];
 }

@@ -24,4 +24,19 @@
       display = "side-by-side-show-both";
     };
   };
+
+  programs.zsh.shellAliases = {
+    gd = "git diff";
+    gqc = "gia && git commit";
+    gs = "git status";
+    gp = "git pull";
+    gP = "git push";
+    gbl = "git branch";
+    gbL = "git branch --remotes";
+    gbd = "git branch -d";
+    gbD = "git branch -D";
+    gbm = "git branch -m";
+    gbM = "git branch -M";
+    gbR = "git reset --hard";
+  };
 }
