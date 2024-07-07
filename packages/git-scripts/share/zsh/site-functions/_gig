@@ -1,0 +1,6 @@
+#compdef gig
+
+_gig() { 
+    _values -s \
+        , $(curl -sL 'https://www.toptal.com/developers/gitignore/api/list?format=lines') 
+}

@@ -27,10 +27,11 @@
 
   programs.zsh.shellAliases = {
     gd = "git diff";
-    gqc = "gia && git commit";
-    gs = "git status";
     gp = "git pull";
     gP = "git push";
+    gPU = "git branch --show-current | xargs git push --set-upstream origin";
+    gbs = "git switch";
+    gbS = "git switch --create";
     gbl = "git branch";
     gbL = "git branch --remotes";
     gbd = "git branch -d";

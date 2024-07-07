@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+_FZF_BIND_TOGGLE_ALL='ctrl-b'
+_FZF_LAYOUT='up:80%'
+
+function select_items() {
+    curl -sL 'https://www.toptal.com/developers/gitignore/api/list?format=lines' \
+        | fzf \
+            --multi \
+            --bind "$_FZF_BIND_TOGGLE_ALL":toggle-all \
+            --preview=$'echo "https://www.toptal.com/developers/gitignore/api/{}"| sed "s/\'//g" | xargs curl -sL  | bat --color=always --style=numbers' \
+            --preview-window="$_FZF_LAYOUT" \
+}
+
+if (( $# == 0 )); then
+    items="$(select_items | tr '\n' ','| sed 's/,$//')"
+elif (( $x == 1 )); then
+    items="$1"
+else
+    echo "invalid arguments" 1>&2
+    exit 1
+fi
+
+[[ -n "$items" ]] && curl -sL "https://www.toptal.com/developers/gitignore/api/$items"

@@ -3,69 +3,6 @@
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 ################################################################################
-## git
-################################################################################
-glh() { git rev-parse --short $1|pbcopy }
-compdef _gl glh
-
-glm() { git show -s --format=%s $1|pbcopy }
-compdef _gl glm
-
-gbs() { git switch $1 2&>/dev/null || git switch --create $1 }
-_gbs() { words[1]=(git branch); (( CURRENT+=1 )); service=git; _git }
-compdef _gbs gbs
-
-gc() {
-    if (( $# == 1 )); then
-        if [[ "$1" == . ]]; then
-            git commit --amend
-        else
-            git commit -m "$1"
-        fi
-    else
-        git commit
-    fi
-}
-_gc() { words[1]=(git commit); (( CURRENT+=1 )); service=git; _git }
-compdef _gc gc
-
-gri() {
-    if (( $# == 1 )); then
-        if [[ "$1" =~ '^[0-9]+$' ]]; then
-            git rebase -i "HEAD~$1"
-        else
-            git rebase -i "$1"
-        fi
-    else
-        git rebase -i $(gl 15|fzf|cut -f1 -d' ')
-    fi
-}
-_gri() { words[1]=(git rebase -i); (( CURRENT+=2 )); service=git; _git }
-compdef _gri gri
-
-gpu() { git push --set-upstream $1 $(git branch --show-current) }
-_gpu() { words[1]=(git remote show); (( CURRENT+=2 )); service=git; _git }
-compdef _gpu gpu
-
-gig() { curl -sL "https://www.toptal.com/developers/gitignore/api/$1" }
-_gig() { _values -s , $(curl -sL 'https://www.toptal.com/developers/gitignore/api/list?format=lines') }
-compdef _gig gig
-
-alias gqc='gia && git commit'
-alias gs='git status'
-alias gp='git push'
-alias gr='git rebase'
-alias gg='git pull'
-alias ggr='git pull -r'
-alias gbl='git branch'
-alias gblr='git branch --remotes'
-alias gbd='git branch -d'
-alias gbD='git branch -D'
-alias gbm='git branch -m'
-alias gbM='git branch -M'
-alias gbrh='git reset --hard'
-
-################################################################################
 ## nix
 ################################################################################
 nix-store-path() { echo "$(readlink -f ${$(command -v $1):-$1})" }
