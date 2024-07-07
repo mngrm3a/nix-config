@@ -34,6 +34,7 @@ in
   home.packages = with pkgs; [
     nix
     nix-scripts
+    cheat-more
   ];
   programs.home-manager.enable = true;
 
