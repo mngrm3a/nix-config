@@ -1,0 +1,9 @@
+#compdef gl
+
+_gl() {
+  _arguments \
+    '-s[status]' \
+    '-S[porcelain]:version number:_values "version number" 1 2' \
+    '-l[log]:number of commits:_values "number of commits" 5 10 20' \
+    '-g[graph]:number of commits:_values "number of commits" 5 10 20'
+}

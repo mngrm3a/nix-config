@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+
+if (( $# == 0 )); then
+    cmd='-l'
+else
+    cmd="$1"
+fi
+
+case "$cmd" in
+    '-s')
+        git status
+        ;;
+    '-S')
+        git status --porcelain=v"${2:-1}"
+        ;;
+    '-l')
+        git log --pretty='%h%%%s%%%cr' -n${2:-5} \
+            | column -t -s'%'
+        ;;
+    '-g')
+        count="$2"
+        if [[ -z "$count" ]]; then
+            count='--all'
+        else
+            count="-n $2"
+        fi
+        git log --oneline --graph --decorate "$count"
+        ;;
+    *)
+        echo 'invalid arguments'
+        exit 1
+esac
