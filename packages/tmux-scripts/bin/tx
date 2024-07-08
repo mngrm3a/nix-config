@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+function attach-or-new() {
+    local sessions=( $(tmux list-session 2>/dev/null | cut -f1 -d:) )
+
+    if [[ ${sessions[(ie)$1]} -le ${#sessions} ]]; then
+        exec tmux attach-session -t "$1"
+    else
+        exec tmux new-session -s "$1"
+    fi
+}
+
+if [[ -z "$1" ]]; then
+    name="$(basename "$(pwd)"|tr '[:upper:] /' '[:lower:]-'  | cut -c 1-16)"
+    attach-or-new "$name"
+else
+    attach-or-new "$1"
+fi

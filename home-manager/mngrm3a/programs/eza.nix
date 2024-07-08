@@ -25,5 +25,5 @@ in
     lst = "eza --tree --icons";
   };
 
-  home.file.".local/bin/l".source = "${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe";
+  home.packages = [ pkgs.eza-scripts ];
 }

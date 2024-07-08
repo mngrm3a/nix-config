@@ -47,7 +47,6 @@
       # case-insensitive matching only if there are no case-sensitive matches
       # see https://superuser.com/a/1092328
       zstyle ':completion:*' matcher-list ''' 'm:{a-zA-Z}={A-Za-z}'
-      source <(${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe --toolbox-completions)
     '';
   };
 

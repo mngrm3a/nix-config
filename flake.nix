@@ -3,7 +3,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     #TODO: figure out, why follows doesn't work
     home-manager.url = "github:nix-community/home-manager";
-    zsh-toolbox.url = "github:mngrm3a/zsh-toolbox";
 
     zsh-async = {
       url = "github:mafredri/zsh-async";
@@ -19,7 +18,6 @@
     {
       nixpkgs,
       home-manager,
-      zsh-toolbox,
       zsh-async,
       simple-zsh-nix-shell,
       ...
@@ -40,7 +38,6 @@
           overlays = [
             zsh-plugin-overlay
             package-overlay
-            zsh-toolbox.overlays.default
           ];
         }
       );

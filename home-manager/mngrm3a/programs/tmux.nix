@@ -33,5 +33,5 @@
     '';
   };
 
-  home.file.".local/bin/tx".source = "${pkgs.zsh-toolbox}/bin/zsh-toolbox-exe";
+  home.packages = [ pkgs.tmux-scripts ];
 }
