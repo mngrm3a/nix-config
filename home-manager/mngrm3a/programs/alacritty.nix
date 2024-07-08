@@ -17,8 +17,7 @@ in
       window = {
         option_as_alt = "OnlyLeft";
         opacity = 1;
-        # blur = true;
-        startup_mode = "SimpleFullscreen";
+        startup_mode = "Fullscreen";
       };
       font = {
         size = 16;
