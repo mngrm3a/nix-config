@@ -26,6 +26,7 @@
       # mngrm3a.telescope
       telescope-nvim
       telescope-fzf-native-nvim
+      telescope-ui-select-nvim
       # mngrm3a.treesitter
       nvim-treesitter.withAllGrammars
 
