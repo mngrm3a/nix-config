@@ -43,7 +43,7 @@
       export PATH="$PATH:$HOME/.local/bin"
     '';
 
-    initExtra = ''
+    initContent = ''
       # case-insensitive matching only if there are no case-sensitive matches
       # see https://superuser.com/a/1092328
       zstyle ':completion:*' matcher-list ''' 'm:{a-zA-Z}={A-Za-z}'
@@ -51,7 +51,7 @@
   };
 
   # NOTE: this is needed to make simple-zsh-nix-shell work
-  # https://github.com/goolord/simple-zsh-nix-shell?tab=readme-ov-file#install 
+  # https://github.com/goolord/simple-zsh-nix-shell?tab=readme-ov-file#install
   home.file.".bashrc".text = ''
     if [ ! -z ''${SIMPLE_ZSH_NIX_SHELL_BASH+x} ] ;
       then source $SIMPLE_ZSH_NIX_SHELL_BASH

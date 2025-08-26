@@ -6,7 +6,7 @@
 }:
 let
   # * https://github.com/alacritty/alacritty-theme/tree/master/themes
-  colorTheme = builtins.fromTOML (builtins.readFile "${pkgs.alacritty-theme}/gruvbox_dark.toml");
+  colorTheme = builtins.fromTOML (builtins.readFile "${pkgs.alacritty-theme}/share/alacritty-theme//gruvbox_dark.toml");
   fontFamily = "Inconsolata Nerd Font Mono";
 in
 {
