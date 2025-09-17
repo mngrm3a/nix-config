@@ -14,7 +14,7 @@ function select_items() {
 
 if (( $# == 0 )); then
     items="$(select_items | tr '\n' ','| sed 's/,$//')"
-elif (( $x == 1 )); then
+elif (( $# == 1 )); then
     items="$1"
 else
     echo "invalid arguments" 1>&2
