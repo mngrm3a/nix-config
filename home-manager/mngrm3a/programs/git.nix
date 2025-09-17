@@ -14,6 +14,7 @@
       core.editor = "nvim";
       diff.tool = "nvimdiff";
       difftool.prompt = false;
+      credential.helper = "osxkeychain";
     };
     aliases = {
       graph = "log --oneline --graph --decorate --all";
