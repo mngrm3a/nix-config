@@ -14,11 +14,10 @@
 
       # mngrm3a.pretty
       gruvbox-nvim
-      tokyonight-nvim
+      noice-nvim
       lualine-nvim
       nvim-web-devicons
-      noice-nvim
-      lspkind-nvim
+      # lspkind-nvim
 
       # mngrm3a.comments
       todo-comments-nvim
@@ -27,14 +26,13 @@
       telescope-nvim
       telescope-fzf-native-nvim
       telescope-ui-select-nvim
+
       # mngrm3a.treesitter
       nvim-treesitter.withAllGrammars
+      nvim-treesitter-textobjects
 
       # mngrm3a.lsp
       nvim-lspconfig
-
-      # mngrm3a.terminal
-      iron-nvim
 
       # mngrm3a.vcs
       gitsigns-nvim
@@ -42,24 +40,12 @@
       neogit
 
       # mngrm3a.completion
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp-cmdline
-      cmp-path
-      cmp-buffer
-      cmp_luasnip
-      cmp-nvim-lsp-signature-help
-      cmp-nvim-lsp-document-symbol
-      luasnip
+      blink-cmp
 
       # utils
       which-key-nvim
       undotree
       oil-nvim
-
-      # TODO: import as flake when config is stable
-      # config plugin
-      # mngrm3a-nvim
     ];
   };
 
