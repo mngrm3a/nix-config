@@ -20,7 +20,7 @@ in
   ];
 
   home = {
-    stateVersion = "24.05";
+    stateVersion = "25.05";
     username = "mngrm3a";
     homeDirectory = if isDarwin then "/Users/mngrm3a" else "/home/mngrm3a";
     language = {
