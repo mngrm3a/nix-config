@@ -4,6 +4,19 @@
   pkgs,
   ...
 }:
+let
+  gruvbox-query-polarity = pkgs.writeShellScript "gruvbox-query-polarity.sh" ''
+    if defaults read -g AppleInterfaceStyle &>/dev/null; then
+      tmux set-option -g @tmux-gruvbox "dark256"
+    else
+      tmux set-option -g @tmux-gruvbox "light256"
+    fi
+  '';
+  gruvbox-apply-polarity = pkgs.writeShellScript "gruvbox-apply-polarity.sh" ''
+    ${gruvbox-query-polarity}
+    ${pkgs.tmuxPlugins.gruvbox}/share/tmux-plugins/gruvbox/gruvbox-tpm.tmux
+  '';
+in
 {
   # integrations
   programs.fzf.tmux.enableShellIntegration = true;
@@ -20,7 +33,7 @@
     plugins = with pkgs.tmuxPlugins; [
       {
         plugin = gruvbox;
-        extraConfig = "set -g @tmux-gruvbox 'dark' # or 'light'";
+        extraConfig = "run-shell ${gruvbox-query-polarity}";
       }
       { plugin = tmux-fzf; }
     ];
@@ -54,6 +67,10 @@
 
       # Bind 'a' in the prefix table to switch to the last window
       bind a last-window
+
+      # Bind 'C-g' in the prefix table to reapplu gruvbox with the current
+      # system polarity
+      bind-key C-g run-shell "${gruvbox-apply-polarity}"
     '';
   };
 

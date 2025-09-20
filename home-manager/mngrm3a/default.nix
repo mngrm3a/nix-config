@@ -6,6 +6,11 @@
 }:
 let
   inherit (pkgs.stdenv) isDarwin;
+  toINI =
+    attrs:
+    builtins.concatStringsSep "\n" (
+      map (k: lib.generators.mkKeyValueDefault { } "=" k (attrs.${k})) (builtins.attrNames attrs)
+    );
 in
 {
   imports = [
@@ -43,9 +48,11 @@ in
 
   programs.bat = {
     enable = true;
-    config = {
-      theme = "gruvbox-dark";
-    };
+  };
+  # TODO: do this via module config once home-manager supports it
+  home.sessionVariables = {
+    BAT_THEME_LIGHT = "gruvbox-light";
+    BAT_THEME_DARK = "gruvbox-dark";
   };
 
   home.file."Library/LaunchAgents/com.local.KeyRemapping.plist" = {
@@ -67,4 +74,13 @@ in
     };
   };
 
+  # TODO: manage config via home-manager module
+  # this is only necessary because ghostty is marked as broken on macos
+  # NOTE: remove toINI as its only used here
+  home.file.".config/ghostty/config".text = toINI {
+    theme = "light:Gruvbox Light,dark:Gruvbox Dark";
+    font-size = 17;
+    fullscreen = true;
+    font-family = "Inconsolata Nerd Font Mono";
+  };
 }
