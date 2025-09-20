@@ -8,7 +8,7 @@ function select_items() {
         | fzf \
             --multi \
             --bind "$_FZF_BIND_TOGGLE_ALL":toggle-all \
-            --preview=$'echo "https://www.toptal.com/developers/gitignore/api/{}"| sed "s/\'//g" | xargs curl -sL  | bat --color=always --style=numbers' \
+            --preview="curl -sL https://www.toptal.com/developers/gitignore/api/{}|bat --color=always --style=numbers" \
             --preview-window="$_FZF_LAYOUT" \
 }
 
