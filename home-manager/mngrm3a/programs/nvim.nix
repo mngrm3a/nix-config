@@ -13,7 +13,8 @@
       plenary-nvim
 
       # mngrm3a.pretty
-      gruvbox-nvim
+      vscode-nvim
+      github-nvim-theme
       noice-nvim
       lualine-nvim
       nvim-web-devicons
@@ -55,7 +56,7 @@
 
     lua-language-server
 
-    nodePackages.bash-language-server
+    bash-language-server
     shellcheck
     shfmt
   ];

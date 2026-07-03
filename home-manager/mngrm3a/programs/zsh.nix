@@ -39,6 +39,10 @@
       }
     ];
 
+    localVariables = {
+      SHELL = "${pkgs.zsh}/bin/zsh";
+    };
+
     envExtra = ''
       export PATH="$PATH:$HOME/.local/bin"
     '';

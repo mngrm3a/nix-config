@@ -51,8 +51,8 @@ in
   };
   # TODO: do this via module config once home-manager supports it
   home.sessionVariables = {
-    BAT_THEME_LIGHT = "gruvbox-light";
-    BAT_THEME_DARK = "gruvbox-dark";
+    BAT_THEME_LIGHT = "GitHub";
+    BAT_THEME_DARK = "GitHub";
   };
 
   home.file."Library/LaunchAgents/com.local.KeyRemapping.plist" = {
@@ -78,7 +78,7 @@ in
   # this is only necessary because ghostty is marked as broken on macos
   # NOTE: remove toINI as its only used here
   home.file.".config/ghostty/config".text = toINI {
-    theme = "light:Gruvbox Light,dark:Gruvbox Dark";
+    theme = "light:Github Light Default,dark:Github Dark Dimmed";
     font-size = 17;
     fullscreen = true;
     font-family = "Inconsolata Nerd Font Mono";
