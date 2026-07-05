@@ -8,51 +8,15 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    plugins = with pkgs.vimPlugins; [
-      # extra dependency
-      plenary-nvim
-
-      # mngrm3a.pretty
-      vscode-nvim
-      github-nvim-theme
-      noice-nvim
-      lualine-nvim
-      nvim-web-devicons
-      # lspkind-nvim
-
-      # mngrm3a.comments
-      todo-comments-nvim
-
-      # mngrm3a.telescope
-      telescope-nvim
-      telescope-fzf-native-nvim
-      telescope-ui-select-nvim
-
-      # mngrm3a.treesitter
-      nvim-treesitter.withAllGrammars
-      nvim-treesitter-textobjects
-
-      # mngrm3a.lsp
-      nvim-lspconfig
-
-      # mngrm3a.vcs
-      gitsigns-nvim
-      diffview-nvim
-      neogit
-
-      # mngrm3a.completion
-      blink-cmp
-
-      # utils
-      which-key-nvim
-      undotree
-      oil-nvim
-    ];
+    initLua = lib.mkAfter ''
+      vim.opt.rtp:prepend("~/Projects/mngrm3a.nvim")
+      require("config.lazy")
+    '';
   };
 
   home.packages = with pkgs; [
     nil
-    nixfmt-rfc-style
+    nixfmt
 
     lua-language-server
 

@@ -47,6 +47,13 @@
       export PATH="$PATH:$HOME/.local/bin"
     '';
 
+    profileExtra = ''
+      # Add Visual Studio Code (code)
+      path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
+      path+=("$HOME/.miniforge/condabin")
+      export PATH
+    '';
+
     initContent = ''
       # case-insensitive matching only if there are no case-sensitive matches
       # see https://superuser.com/a/1092328
