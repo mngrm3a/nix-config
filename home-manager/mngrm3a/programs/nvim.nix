@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ lib, pkgs, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -23,6 +18,9 @@
     bash-language-server
     shellcheck
     shfmt
+
+    vscode-json-languageserver
+    yaml-language-server
   ];
 
   programs.zsh.shellAliases = {
