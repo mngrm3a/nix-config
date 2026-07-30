@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 let
   ezaOptions = "--group-directories-first --group --long --icons --git --git-ignore";
 in

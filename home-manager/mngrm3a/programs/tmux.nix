@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 let
   gruvbox-query-polarity = pkgs.writeShellScript "gruvbox-query-polarity.sh" ''
     if defaults read -g AppleInterfaceStyle &>/dev/null; then

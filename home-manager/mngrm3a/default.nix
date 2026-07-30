@@ -1,27 +1,22 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 let
   inherit (pkgs.stdenv) isDarwin;
-  toINI =
-    attrs:
-    builtins.concatStringsSep "\n" (
-      map (k: lib.generators.mkKeyValueDefault { } "=" k (attrs.${k})) (builtins.attrNames attrs)
-    );
 in
 {
+
   imports = [
     ./programs/alacritty.nix
+    ./programs/ghostty.nix
     ./programs/zsh.nix
     ./programs/tmux.nix
-    ./programs/zellij.nix
+    # ./programs/zellij.nix
     ./programs/fzf.nix
     ./programs/git.nix
-    ./programs/nvim.nix
     ./programs/eza.nix
+    ./programs/nvim.nix
+    ./programs/bat.nix
+    ./programs/bun.nix
+    ./programs/stack.nix
   ];
 
   home = {
@@ -41,19 +36,10 @@ in
     nix-scripts
     cheat-more
   ];
-  programs.home-manager.enable = true;
 
+  programs.home-manager.enable = true;
   programs.ripgrep.enable = true;
   programs.zoxide.enable = true;
-
-  programs.bat = {
-    enable = true;
-  };
-  # TODO: do this via module config once home-manager supports it
-  home.sessionVariables = {
-    BAT_THEME_LIGHT = "GitHub";
-    BAT_THEME_DARK = "GitHub";
-  };
 
   home.file."Library/LaunchAgents/com.local.KeyRemapping.plist" = {
     # NOTE:
@@ -61,26 +47,5 @@ in
     # * RightOption -> LeftControl
     enable = isDarwin;
     source = ./macos/com.local.KeyRemapping.plist;
-  };
-
-  home.file.".stack/config.yaml".text = lib.generators.toYAML { } {
-    templates = {
-      params = {
-        author-name = "mngrm3a";
-        author-email = "9266859+mngrm3a@users.noreply.github.com";
-        copyright = "2024 mngrm3a";
-        github-username = "mngrm3a";
-      };
-    };
-  };
-
-  # TODO: manage config via home-manager module
-  # this is only necessary because ghostty is marked as broken on macos
-  # NOTE: remove toINI as its only used here
-  home.file.".config/ghostty/config".text = toINI {
-    theme = "light:Github Light Default,dark:Github Dark Dimmed";
-    font-size = 17;
-    fullscreen = true;
-    font-family = "Inconsolata Nerd Font Mono";
   };
 }
